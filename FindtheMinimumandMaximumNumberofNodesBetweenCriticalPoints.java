@@ -8,6 +8,16 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+
+/*
+Idea is to iterate the linked list from second to last but 1 node, and check if the node is critical.
+
+The maximum distance would be between first and last critical node.
+
+Minimum distance is what would vary, so maintain a last critical index position, and current critical index position.
+
+*/
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
         
@@ -15,7 +25,7 @@ class Solution {
             return new int[]{-1,-1};
         int[] ret = new int[]{Integer.MAX_VALUE,Integer.MIN_VALUE};
         int lastmaxindex=1,lastminindex=1,i=1;
-        int firstcriticalindex=-1,lastcriticalindex=-1,currentcriticalindex=-1,critcount=0;
+        int firstcriticalindex=-1,lastcriticalindex=-1,currentcriticalindex=-1;
         ListNode prev = head;
         head=head.next;
         while(head.next!=null && !isCritical(head,prev))
@@ -27,7 +37,6 @@ class Solution {
         firstcriticalindex = i;
         lastcriticalindex = i;
         currentcriticalindex=i;
-        critcount=1;
         if(head.next==null)
         return new int[]{-1,-1};
         prev=head;
