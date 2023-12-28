@@ -1,0 +1,18 @@
+class Solution {
+    public int hIndex(int[] citations) {
+    int[] counts = new int[citations.length+2];
+    for(int i=citations.length-1;i>=0;i--)
+    {
+        counts[Math.min(citations[i],citations.length)]++;
+    }
+    int ret;
+    for(int i=0;i<counts.length;i++)
+    System.out.print(counts[i]+" ");
+    for(ret = citations.length;ret>0;ret--)
+    {
+        counts[ret] += counts[ret+1];
+        if(counts[ret]>=ret) break;
+    }
+    return ret;
+    }
+}
